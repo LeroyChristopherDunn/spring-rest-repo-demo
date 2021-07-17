@@ -21,6 +21,14 @@ public class SpringRestRepoDemoApplication {
 	}
 
 	@Bean
+	CommandLineRunner swaggerInfo() {
+		return args -> {
+			log.info("Open API docs: http://localhost:8080/v3/api-docs/ " );
+			log.info("Swagger UI: http://localhost:8080/swagger-ui.html ");
+		};
+	}
+
+	@Bean
 	CommandLineRunner initDatabase(PersonRepository repository) {
 		return args -> {
 			log.info("Preloading " + repository.save(new Person( "Bilbo", "Baggins")));
