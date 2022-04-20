@@ -21,8 +21,7 @@ public class HelloWorldControllerTest {
     public void helloWorld() throws Exception {
         this.mockMvc.perform(get("/helloWorld"))
                 .andDo(print())
-                .andExpect(status().isUnauthorized());
-//                .andExpect(status().isOk())
-//                .andExpect(content().string(is("hello world")));
+                .andExpect(status().isOk())
+                .andExpect(content().string(is("hello world")));
     }
 }
