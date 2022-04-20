@@ -81,6 +81,51 @@ public class PersonRepositoryTest {
     }
 
     @Test
+    public void givenPeopleAndSort1_whenGetPeople_shouldReturnPeopleSorted() throws Exception {
+
+        Person save1 = repository.save(mockPerson1);
+        Person save2 = repository.save(mockPerson2);
+
+        this.mockMvc.perform(get("/people").queryParam("sort", "id"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._embedded.people").isArray())
+                .andExpect(jsonPath("$._embedded.people", hasSize(2)))
+                .andExpect(jsonPath("$._embedded.people[0].id", is(save1.getId().intValue())))
+                .andExpect(jsonPath("$._embedded.people[1].id", is(save2.getId().intValue())));
+    }
+
+    @Test
+    public void givenPeopleAndSort2_whenGetPeople_shouldReturnPeopleSorted() throws Exception {
+
+        Person save1 = repository.save(mockPerson1);
+        Person save2 = repository.save(mockPerson2);
+
+        this.mockMvc.perform(get("/people").queryParam("sort", "id,desc"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._embedded.people").isArray())
+                .andExpect(jsonPath("$._embedded.people", hasSize(2)))
+                .andExpect(jsonPath("$._embedded.people[0].id", is(save2.getId().intValue())))                .andExpect(jsonPath("$._embedded.people[1].id", is(save1.getId().intValue())))
+                .andExpect(jsonPath("$._embedded.people[1].id", is(save1.getId().intValue())));
+    }
+
+    @Test
+    public void givenPeopleAndInvalidSort_whenGetPeople_shouldReturnPeople() throws Exception {
+
+        Person save1 = repository.save(mockPerson1);
+        Person save2 = repository.save(mockPerson2);
+
+        this.mockMvc.perform(get("/people").queryParam("sort", "invalid"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._embedded.people").isArray())
+                .andExpect(jsonPath("$._embedded.people", hasSize(2)))
+                .andExpect(jsonPath("$._embedded.people[0].id", is(save1.getId().intValue())))
+                .andExpect(jsonPath("$._embedded.people[1].id", is(save2.getId().intValue())));
+    }
+
+    @Test
     public void givenNoPeople_whenGetPersonById_shouldReturn404() throws Exception {
         this.mockMvc.perform(get("/people/" + mockPerson1.getId()))
                 .andDo(print())
