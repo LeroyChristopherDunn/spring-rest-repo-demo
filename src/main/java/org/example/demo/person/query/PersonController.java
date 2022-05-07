@@ -1,5 +1,8 @@
-package org.example.demo;
+package org.example.demo.person.query;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.example.demo.person.Person;
+import org.example.demo.person.PersonRepository;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "People")
 @RestController
 @RequestMapping("/people")
 public class PersonController {

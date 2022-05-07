@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.person.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

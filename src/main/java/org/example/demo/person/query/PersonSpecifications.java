@@ -1,5 +1,6 @@
-package org.example.demo;
+package org.example.demo.person.query;
 
+import org.example.demo.person.Person;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;

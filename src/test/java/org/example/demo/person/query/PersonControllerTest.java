@@ -1,6 +1,7 @@
-package org.example.demo;
+package org.example.demo.person.query;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.demo.person.Person;
+import org.example.demo.person.PersonRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SuppressWarnings("unused")
 @SpringBootTest
 @AutoConfigureMockMvc
 public class PersonControllerTest {
@@ -29,7 +31,7 @@ public class PersonControllerTest {
     private final Person mockPerson1 = new Person(
             1L,
             "FN1",
-            "LN!"
+            "LN1"
     );
 
     private final Person mockPerson2 = new Person(
@@ -37,14 +39,6 @@ public class PersonControllerTest {
             "FN2",
             "LN2"
     );
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @BeforeEach
     public void setupAll(){
